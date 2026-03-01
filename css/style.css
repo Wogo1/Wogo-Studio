@@ -2,9 +2,11 @@
   --bg: #d9d7d1;
   --ink: #111;
   --line: rgba(0,0,0,.35);
+  --stroke: 1px;
   --tab: 52px;
   --r: 10px;
   --pad: 18px;
+  --gutter: 20px;
 }
 
 /* Base */
@@ -17,14 +19,65 @@ body{
 }
 
 /* Layout global */
-header, main, footer{
+main, footer{
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 20px;
 }
 
+/* Header layout */
+.site-header,
+.site-nav{
+  max-width: 1100px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+/* Header */
+.site-header{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  border-top: var(--stroke) solid var(--line);
+  border-bottom: var(--stroke) solid var(--line)
+}
+
+.header-col{
+  padding: 18px; /* ou var(--pad) si tu veux */
+}
+
+.header-col:not(:last-child){
+  border-right: var(--stroke) solid var(--line);
+}
+
+.header-logo img{
+  height: 46px;
+  display: block;
+}
+
+.header-tagline{
+  text-align: right;
+}
+
+.header-tagline p{
+  margin: 0;
+}
+
+.header-version{
+  text-align: right;
+}
+
 /* Nav */
-nav a{ margin-right: 20px; }
+.navbar{
+  max-width: 1100px;
+  margin: 25px auto 0;
+  padding: 0 20px;
+}
+
+.navbar a{
+  margin-right: 20px;
+}
 
 /* Links */
 a{
@@ -46,7 +99,7 @@ footer{
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 24px;
-  border-top: 1px solid var(--line);
+  border-top: var(--stroke) solid var(--line);
   padding-top: 18px;
 }
 
@@ -69,14 +122,21 @@ footer{
 /* ===== Notes — tiroir propre ===== */
 
 .note{
-  border-bottom: 1px solid var(--line);
+  border-bottom: var(--stroke) solid var(--line);
   background: transparent;
   overflow: hidden;
+
+  /* étire la ligne jusqu’au bord droit du container */
+  padding-right: var(--gutter);
+  margin-right: calc(-1 * var(--gutter));
 }
 
 /* Ligne du haut pour la première note */
 .note:first-child{
-  border-top: 1px solid var(--line);
+  border-top: var(--stroke) solid var(--line);
+
+  padding-right: var(--gutter);
+  margin-right: calc(-1 * var(--gutter));
 }
 
 /* Onglet */
