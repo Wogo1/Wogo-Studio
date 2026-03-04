@@ -3,13 +3,25 @@
   --ink: #111;
   --line: rgba(0,0,0,.35);
   --stroke: 1px;
+
   --tab: 52px;
   --r: 10px;
   --pad: 18px;
   --gutter: 20px;
+
+  /* Layout */
+  --container: 1100px;
+  --space-lg: 40px;
+  --space-md: 25px;
+
+  /* Header separators */
+  --header-gap: 6px;
+  --header-gap-1: 20px;
+  --header-gap-2: 8px;
 }
 
-/* Base */
+/* ================= BASE ================= */
+
 body{
   background: var(--bg);
   color: var(--ink);
@@ -18,37 +30,82 @@ body{
   line-height: 1.6;
 }
 
-/* Layout global */
-main, footer{
-  max-width: 1100px;
-  margin: 40px auto;
+a{
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 20px;
 }
 
-/* Header layout */
+/* ================= SPACING (marges) ================= */
+
+.site-header{ margin-top: var(--space-lg); }
+.navbar{ margin-top: var(--space-md); }
+main{ margin: var(--space-lg) auto; }
+.site-footer{ margin-top: var(--space-lg); }
+
+/* ================= HEADER + FOOTER (structure commune) ================= */
+
 .site-header,
-.site-nav{
-  max-width: 1100px;
-  margin: 40px auto 0;
-  padding: 0 20px;
-}
-
-/* Header */
-.site-header{
+.site-footer{
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-
   border-top: var(--stroke) solid var(--line);
-  border-bottom: var(--stroke) solid var(--line)
+  border-bottom: var(--stroke) solid var(--line);
 }
+
+.header-col,
+.footer-col{
+  padding: var(--pad);
+}
+
+/* ================= HEADER (séparateurs coupés) ================= */
 
 .header-col{
-  padding: 18px; /* ou var(--pad) si tu veux */
+  position: relative;
 }
 
-.header-col:not(:last-child){
-  border-right: var(--stroke) solid var(--line);
+/* on enlève le border vertical dans le header */
+.site-header .header-col:not(:last-child){
+  border-right: 0;
+}
+
+/* séparateur vertical "coupé" */
+.site-header .header-col:not(:last-child)::after{
+  content: "";
+  position: absolute;
+  right: 0;
+  top: var(--header-gap);
+  bottom: var(--header-gap);
+  width: var(--stroke);
+  background: var(--line);
+}
+
+/* réglages par séparateur */
+.site-header .header-col:nth-child(1)::after{
+  top: var(--header-gap-1);
+  bottom: var(--header-gap-1);
+}
+
+.site-header .header-col:nth-child(2)::after{
+  top: var(--header-gap-2);
+  bottom: var(--header-gap-2);
+}
+
+/* logo */
+.header-logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-logo img{
@@ -56,7 +113,9 @@ main, footer{
   display: block;
 }
 
-.header-tagline{
+/* textes */
+.header-tagline,
+.header-version{
   text-align: right;
 }
 
@@ -64,34 +123,29 @@ main, footer{
   margin: 0;
 }
 
-.header-version{
-  text-align: right;
-}
-
-/* Nav */
-.navbar{
-  max-width: 1100px;
-  margin: 25px auto 0;
-  padding: 0 20px;
-}
+/* ================= NAV ================= */
 
 .navbar a{
   margin-right: 20px;
 }
 
-/* Links */
-a{
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+/* ================= FOOTER ================= */
+
+.footer-col:not(:last-child){
+  border-right: var(--stroke) solid var(--line);
 }
 
-/* Footer */
-footer{
-  margin-top: 80px;
-  font-size: 0.9rem;
-  opacity: 0.7;
+.footer-tagline{
+  text-align: left;
 }
+
+.footer-update{
+  text-align: right;
+}
+
+/* ===================================================================== */
+/* ======================= Notes — NE PAS TOUCHER ======================= */
+/* ===================================================================== */
 
 /* ===== Notes — grille ===== */
 
@@ -171,10 +225,6 @@ footer{
 .note-toggle::after{
   content: "+";
   font-size: 1.8rem;
-}
-
-.note[open] .note-toggle::after{
-  content: "−";
 }
 
 .note[open] .note-toggle::after{
