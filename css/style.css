@@ -5,7 +5,6 @@
   --stroke: 1px;
 
   --tab: 52px;
-  --r: 10px;
   --pad: 18px;
   --gutter: 20px;
 
@@ -42,7 +41,7 @@ a{
   max-width: var(--container);
   margin-left: auto;
   margin-right: auto;
-  padding: 0 20px;
+  padding: 0 var(--gutter);
 }
 
 /* ================= SPACING (marges) ================= */
